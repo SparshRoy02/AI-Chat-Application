@@ -1,0 +1,27 @@
+import mongoose from 'mongoose';
+
+const messageSchema = new mongoose.Schema(
+  {
+    sessionId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Session',
+      required: true,
+      index: true,
+    },
+    role: {
+      type: String,
+      enum: ['user', 'assistant', 'system'],
+      required: true,
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+  },
+  {
+    timestamps: { createdAt: true, updatedAt: false },
+  }
+);
+
+const Message = mongoose.model('Message', messageSchema);
+export default Message;
