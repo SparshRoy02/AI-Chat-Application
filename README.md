@@ -2,13 +2,13 @@
 
 A complete, end-to-end full-stack AI chat application built with React (Vite) and Node.js (Express). It interacts directly with locally hosted Ollama Llama 3 models and provides real-time streaming text generation. 
 
-## 🚀 Features
+##  Features
 - **Real-Time Streaming**: Stream responses directly from the local Ollama LLM in real-time, just like ChatGPT.
 - **Session Management**: Chat histories are saved persistently as separate "Sessions" in a MongoDB database.
 - **Modern UI**: A responsive, beautifully designed chat interface utilizing React, Vite, and Lucide React icons.
 - **Contextual Awareness**: Maintains the chat context by sending the message history along with new queries to the model.
 
-## 🏗️ Architecture & Tech Stack
+##  Architecture & Tech Stack
 
 ### Frontend
 The frontend is a Single Page Application (SPA) built for performance and simplicity.
@@ -37,7 +37,7 @@ The backend exposes the following main endpoints under `/api`:
 
 ---
 
-## 🛠️ Detailed Step-by-Step Setup Guide
+##  Detailed Step-by-Step Setup Guide
 
 Follow these steps precisely to get the application running on your local machine.
 
@@ -114,8 +114,3 @@ You must configure the backend so it knows how to connect to the database.
    http://localhost:5173
    ```
 3. You should now see the AI Chat Application UI and can begin chatting with Llama 3!
-
----
-
-## 📝 License
-This project is open-source and available under the MIT License.
