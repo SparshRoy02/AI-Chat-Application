@@ -218,6 +218,46 @@ http://localhost:5173
 
 ---
 
+## 🐳 Docker Deployment (One-Command Setup)
+
+You can run the entire application stack (Frontend, Backend, MongoDB, and Ollama) with a single command using Docker Compose.
+
+### 1. Prerequisites
+Ensure you have **Docker** and **Docker Compose** installed:
+- [Docker Desktop for Windows / Mac / Linux](https://www.docker.com/products/docker-desktop/)
+
+### 2. Start All Services
+From the project root directory, run:
+```bash
+docker compose up -d --build
+```
+
+This starts:
+| Container Name | Service | Exposed Port |
+|---|---|---|
+| `ai-chat-frontend` | React SPA + NGINX | `http://localhost:3000` |
+| `ai-chat-backend` | Express.js API | `http://localhost:5000` |
+| `ai-chat-mongodb` | MongoDB 7 | `localhost:27017` |
+| `ai-chat-ollama` | Ollama AI Engine | `localhost:11434` |
+
+### 3. Pull Llama 3 Model into Containerized Ollama
+Once the containers are running, download the Llama 3 model into the Ollama container:
+```bash
+docker exec -it ai-chat-ollama ollama run llama3
+```
+*(After the model finishes downloading, press `Ctrl+D` or type `/bye` to exit the prompt — the Ollama container keeps serving requests).*
+
+### 4. Open the App
+Visit **`http://localhost:3000`** in your browser.
+
+### 5. Stopping the Stack
+```bash
+docker compose down
+```
+*(To also remove stored database & Ollama volumes, use `docker compose down -v`)*
+
+---
+
 ## 🏁 Conclusion
 
 The **AI Chat Application** demonstrates the seamless integration of modern web technologies with on-device LLM inference. It provides a robust, self-hosted blueprint for building responsive AI interfaces without compromising data privacy or incurring recurring API costs.

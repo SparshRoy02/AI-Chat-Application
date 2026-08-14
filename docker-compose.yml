@@ -1,0 +1,81 @@
+services:
+  # -------------------------------------------------------------
+  # 1. Ollama AI Engine (Local LLM Server)
+  # -------------------------------------------------------------
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ai-chat-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - ai-chat-network
+
+  # -------------------------------------------------------------
+  # 2. MongoDB Database
+  # -------------------------------------------------------------
+  mongodb:
+    image: mongo:7
+    container_name: ai-chat-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - ai-chat-network
+
+  # -------------------------------------------------------------
+  # 3. Express.js Backend API
+  # -------------------------------------------------------------
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ai-chat-backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongodb:27017/ai-chat-app
+      - OLLAMA_API_URL=http://ollama:11434/api/chat
+    depends_on:
+      - mongodb
+      - ollama
+    networks:
+      - ai-chat-network
+
+  # -------------------------------------------------------------
+  # 4. React + Vite Frontend (Served with NGINX)
+  # -------------------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_URL=http://localhost:5000/api
+    container_name: ai-chat-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - ai-chat-network
+
+# -------------------------------------------------------------
+# Persistent Volumes & Network
+# -------------------------------------------------------------
+volumes:
+  mongo_data:
+    name: ai_chat_mongo_data
+  ollama_data:
+    name: ai_chat_ollama_data
+
+networks:
+  ai-chat-network:
+    name: ai_chat_network
+    driver: bridge
