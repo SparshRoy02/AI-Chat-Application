@@ -7,7 +7,6 @@
 ![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-8-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Ollama](https://img.shields.io/badge/Ollama-Llama3-FF6F00?style=for-the-badge&logo=meta&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)
 
 **A privacy-first, full-stack AI chat application powered by locally hosted Llama 3 via Ollama — zero cloud API costs, no telemetry, and complete data privacy.**
 
@@ -24,7 +23,6 @@
 - [API Reference](#-api-reference)
 - [Setup Guide](#️-detailed-step-by-step-setup-guide)
 - [Conclusion](#-conclusion)
-- [License](#-license)
 
 ---
 
@@ -242,13 +240,3 @@ The **AI Chat Application** demonstrates the seamless integration of modern web 
 - 💾 **Export Chats**: Export chat histories to Markdown, PDF, or JSON.
 
 ---
-
-## 📝 License
-
-This project is licensed under the **MIT License**.
-
----
-
-<div align="center">
-Developed with ❤️ by <a href="https://github.com/SparshRoy02">SparshRoy02</a>
-</div>
